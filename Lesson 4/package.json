@@ -1,0 +1,19 @@
+{
+  "name": "lesson-4-mocking",
+  "version": "1.0.0",
+  "description": "Test Runner",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watch *.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.4.7"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0"
+  }
+}
