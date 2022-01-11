@@ -4,24 +4,35 @@ dotenv.config();
 //it("works", () => {
 //.then(result => expect(result).toBe(2));
 //});
-const emptyFunction = (url) => {}
+const emptyFunction = (url) => {};
 
 it("Verify if api of vat is called", () => {
   let isFakedFetchCalled = false;
 
   const fakeFetch = (url) => {
-    expect(url).toBe(`http://apilayer.net/api/rate?access_key=${process.env.API_KEY}&country_code=DE`)
+    expect(url).toBe(
+      `http://apilayer.net/api/rate?access_key=${process.env.API_KEY}&country_code=DE`
+    );
     isFakedFetchCalled = true;
-  }
+
+    return Promise.resolve({
+      json: () =>
+        Promise.resolve({
+          data: {
+            standard_rate: 19,
+          },
+        }),
+    });
+  };
+
   orderTotal(fakeFetch, {
-    country: 'DE',
+    country: "DE",
     items: [
       { name: "Dragon Food", price: 8, quant: 1 },
       { name: "Dragon Jail", price: 800, quant: 1 },
     ],
   }).then((result) => {
-
-    expect(isFakedFetchCalled).toBe(true)
+    expect(isFakedFetchCalled).toBe(true);
   });
 });
 
